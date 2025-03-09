@@ -14,11 +14,11 @@ connectToDb();
 
 app.use(
     cors({
-      origin: "https://uber-frontend-jet.vercel.app", // Allow your frontend
+      origin: "https://uber-frontend-jet.vercel.app",
       methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true, // Allow cookies & authentication headers
+      credentials: true,
     })
-  );
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
