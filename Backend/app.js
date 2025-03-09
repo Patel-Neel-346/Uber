@@ -13,11 +13,11 @@ const rideRoutes = require('./routes/ride.routes');
 connectToDb();
 
 app.use(
-    cors({
-      origin: "https://uber-frontend-f369qix4m-neelpatels-projects-4b8858f6.vercel.app",
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
-    })
+  cors({
+    origin: ["https://uber-frontend-jet.vercel.app"], // Your frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Allow cookies & authentication
+  })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
