@@ -14,9 +14,9 @@ connectToDb();
 
 app.use(
   cors({
-    origin: ["https://uber-backend-b0vkoul66-neelpatels-projects-4b8858f6.vercel.app"], // Your frontend domain
+    origin: ["https://uber-frontend-qzsp76289-neelpatels-projects-4b8858f6.vercel.app"], // Allow frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Allow cookies & authentication
+    credentials: true, // Allow cookies & authentication headers
   })
 );
 app.use(express.json());
