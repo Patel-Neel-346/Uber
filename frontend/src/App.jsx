@@ -16,7 +16,7 @@ import CaptainRiding from './pages/CaptainRiding'
 import 'remixicon/fonts/remixicon.css'
 
 const App = () => {
-
+  console.log("welocome to Uber Clone")
   return (
     <div>
       <Routes>
