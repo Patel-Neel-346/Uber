@@ -1,8 +1,8 @@
-const captainController = require('../controllers/captain.controller');
+const captainController = require('../controllers/captain.controller.js');
 const express = require('express');
 const router = express.Router();
 const { body } = require("express-validator")
-const authMiddleware = require('../middlewares/auth.middleware');
+const authMiddleware = require('../middlewares/auth.middleware.js');
 
 
 router.post('/register', [
