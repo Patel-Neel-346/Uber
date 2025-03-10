@@ -11,14 +11,7 @@ const mapsRoutes = require('./routes/maps.routes');
 const rideRoutes = require('./routes/ride.routes');
 
 connectToDb();
-
-app.use(
-  cors({
-    origin: ["https://uber-git-uber-neelpatels-projects-4b8858f6.vercel.app/"], // Allow frontend
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Allow cookies & authentication headers
-  })
-);
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

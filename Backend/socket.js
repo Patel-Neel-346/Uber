@@ -7,10 +7,9 @@ let io;
 function initializeSocket(server) {
     io = socketIo(server, {
         cors: {
-            origin: ["https://uber-git-uber-neelpatels-projects-4b8858f6.vercel.app"], // Allow frontend for WebSocket
-            methods: ["GET", "POST"],
-            credentials: true, // Allow authentication headers & cookies
-        },
+            origin: '*',
+            methods: [ 'GET', 'POST' ]
+        }
     });
 
     io.on('connection', (socket) => {
