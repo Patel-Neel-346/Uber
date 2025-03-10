@@ -7,7 +7,7 @@ let io;
 function initializeSocket(server) {
     io = socketIo(server, {
         cors: {
-            origin: 'https://uber-frontend-brown.vercel.app',
+            origin: '*',
             methods: ['GET', 'POST'],
             credentials: true,
           },
