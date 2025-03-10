@@ -24,3 +24,214 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+**PHP Project Code for Chatbot Training**
+
+This document contains PHP project code, including login, registration, profile management, course management, instructor management, and additional functionalities. The explanations and comments will help Chatbase understand the structure and purpose of the code.
+
+---
+
+## **1. User Authentication System**
+
+### **Login (login.php)**
+
+```php
+<?php
+session_start();
+include 'db.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $query = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row["password"])) {
+            $_SESSION["user_id"] = $row["id"];
+            echo "Login successful";
+        } else {
+            echo "Invalid password";
+        }
+    } else {
+        echo "User not found";
+    }
+}
+?>
+```
+
+**Explanation:**
+
+- Starts a session.
+- Connects to the database.
+- Fetches user details and verifies the password.
+- If authentication is successful, the user logs in.
+
+---
+
+### **Registration (register.php)**
+
+```php
+<?php
+include 'db.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+    if (mysqli_query($conn, $query)) {
+        echo "Registration successful";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+?>
+```
+
+**Explanation:**
+
+- Takes user input from a form.
+- Hashes the password for security.
+- Inserts the new user into the database.
+- Returns success or failure messages.
+
+---
+
+## **2. Profile Management**
+
+### **Update Profile (profile.php)**
+
+```php
+<?php
+session_start();
+include 'db.php';
+if (!isset($_SESSION["user_id"])) {
+    echo "Not logged in";
+    exit;
+}
+$user_id = $_SESSION["user_id"];
+$query = "SELECT * FROM users WHERE id='$user_id'";
+$result = mysqli_query($conn, $query);
+$user = mysqli_fetch_assoc($result);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $query = "UPDATE users SET name='$name' WHERE id='$user_id'";
+    if (mysqli_query($conn, $query)) {
+        echo "Profile updated";
+    } else {
+        echo "Error updating profile";
+    }
+}
+?>
+```
+
+**Explanation:**
+
+- Ensures the user is logged in before allowing profile updates.
+- Fetches and updates user information.
+- Provides feedback messages.
+
+---
+
+## **3. Course Management**
+
+### **Add Course (add\_course.php)**
+
+```php
+<?php
+include 'db.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $course_name = $_POST["course_name"];
+    $instructor_id = $_POST["instructor_id"];
+    $query = "INSERT INTO courses (course_name, instructor_id) VALUES ('$course_name', '$instructor_id')";
+    if (mysqli_query($conn, $query)) {
+        echo "Course added successfully";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+?>
+```
+
+**Explanation:**
+
+- Adds a new course to the database.
+- Associates a course with an instructor.
+
+---
+
+### **Instructor Management (add\_instructor.php)**
+
+```php
+<?php
+include 'db.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $query = "INSERT INTO instructors (name, email) VALUES ('$name', '$email')";
+    if (mysqli_query($conn, $query)) {
+        echo "Instructor added successfully";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+?>
+```
+
+**Explanation:**
+
+- Registers a new instructor in the system.
+- Stores instructor details in the database.
+
+---
+
+## **4. Database Connection**
+
+### **Database Configuration (db.php)**
+
+```php
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "chatbot_project";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?>
+```
+
+**Explanation:**
+
+- Connects to the MySQL database.
+- Provides error handling in case of connection failure.
+
+---
+
+## **5. Logout System**
+
+### **Logout (logout.php)**
+
+```php
+<?php
+session_start();
+session_destroy();
+echo "Logged out successfully";
+?>
+```
+
+**Explanation:**
+
+- Ends the session.
+- Logs out the user.
+
+---
+
+## **Conclusion**
+
+This document provides structured PHP code with explanations for Chatbase training. It covers user authentication, database management, session handling, course management, and instructor registration to help the chatbot understand the project better.
+
+If you need additional files such as the database schema or more code snippets, please let me know!
+
