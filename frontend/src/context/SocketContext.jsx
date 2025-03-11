@@ -4,12 +4,8 @@ import { io } from 'socket.io-client';
 
 export const SocketContext = createContext();
 
-const socket = io("https://uber-backend-omega.vercel.app", {
-    transports: ["websocket", "polling"],
-    reconnection: true,
-    reconnectionAttempts: 5,
-    reconnectionDelay: 3000,
-}); 
+const socket = io(`${import.meta.env.VITE_BASE_URL}`); 
+console.log(socket)
 
 const SocketProvider = ({ children }) => {
     useEffect(() => {
