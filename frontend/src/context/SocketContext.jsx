@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 
 export const SocketContext = createContext();
 
-const socket = io(`${import.meta.env.VITE_BASE_URL}`); // Replace with your server URL
+const socket = io(`https://uber-backend-omega.vercel.app`); // Replace with your server URL
 
 const SocketProvider = ({ children }) => {
     useEffect(() => {
