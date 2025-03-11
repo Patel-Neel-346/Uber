@@ -10,7 +10,10 @@ const SocketProvider = ({ children }) => {
     useEffect(() => {
         // Basic connection logic
         socket.on('connect', () => {
-            console.log('Connected to server');
+            if(localStorage.getItem('token') || localStorage.getItem('token1')){
+                
+                console.log('Connected to server');
+            }
         });
 
         socket.on('disconnect', () => {
