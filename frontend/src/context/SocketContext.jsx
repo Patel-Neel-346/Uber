@@ -13,12 +13,14 @@ const SocketProvider = ({ children }) => {
             if(localStorage.getItem('token') || localStorage.getItem('token1')){
                 
                 console.log('Connected to server');
+            }else{
+                socket.on('disconnect', () => {
+                    console.log('Disconnected from server');
+                });
             }
         });
 
-        socket.on('disconnect', () => {
-            console.log('Disconnected from server');
-        });
+        
 
     }, []);
 
